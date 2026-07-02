@@ -10,7 +10,7 @@ type Props = React.PropsWithChildren<{
     action?: React.ReactNode
 }>
 
-const ItemList = ({ children, title, action: Action }: Props) => {
+const ItemList = ({ children, title, action }: Props) => {
 
     const { isActive } = useConversation()
 
@@ -23,6 +23,11 @@ const ItemList = ({ children, title, action: Action }: Props) => {
                 <h1 className='text-2xl font-semibold tracking-tight'>
                     {title}
                 </h1>
+                {action && (
+                    <div className='flex items-center'>
+                        {action}
+                    </div>
+                )}
             </div>
             <div className='w-full h-full flex flex-col items-center justify-start gap-2'>
                 {children}

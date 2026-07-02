@@ -39,7 +39,7 @@ const DesktopNav = () => {
                     })}
                 </ul>
             </nav>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center gap-4">
                 <ThemeToggle />
                 <UserButton />
             </div>
