@@ -74,7 +74,7 @@ function AddFriendDialog() {
                         )}
                     </Field>
                     <DialogFooter>
-                        <Button disabled={false} type='submit'>Add Friend</Button>
+                        <Button disabled={pending} type='submit'>Add Friend</Button>
                     </DialogFooter>
                 </form>
 
