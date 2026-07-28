@@ -49,6 +49,7 @@ export const count = query({
       clerkId: identity.subject,
     });
 
+    
     if (!currentUser) {
       throw new ConvexError("user not found");
     }

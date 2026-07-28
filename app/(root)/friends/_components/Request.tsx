@@ -6,7 +6,6 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useMutationState } from "@/hooks/useMutationState";
 import { ConvexError } from "convex/values";
 import { Check, User, X } from "lucide-react";
-import React from "react";
 import { toast } from "sonner";
 
 type Props = {
@@ -20,11 +19,28 @@ const Request = ({ id, imageUrl, userName, email }: Props) => {
   const { mutate: denyRequest, pending: denyPending } = useMutationState(
     api.request.deny,
   );
+  const { mutate: acceptRequest, pending: acceptPending } = useMutationState(
+    api.request.accept,
+  );
 
-  const denyRequestHandler = (id: number) => {
+  const denyRequestHandler = (id: Id<"requests">) => {
     denyRequest({ id })
       .then(() => {
         toast.success("friend request deleted");
+      })
+      .catch((error) => {
+        toast.error(
+          error instanceof ConvexError
+            ? error.data
+            : "unexpected error occured",
+        );
+      });
+  };
+
+  const acceptRequestHandler = (id: Id<"requests">) => {
+    acceptRequest({ id })
+      .then(() => {
+        toast.success("friend request accepted");
       })
       .catch((error) => {
         toast.error(
@@ -52,13 +68,14 @@ const Request = ({ id, imageUrl, userName, email }: Props) => {
 
       <div className="flex items-center gap-2">
         <Button
+          disabled={denyPending || acceptPending}
           size="icon"
-          onClick={() => {}}
+          onClick={() => acceptRequestHandler(id)}
         >
           <Check />
         </Button>
         <Button
-          disabled={denyPending}
+          disabled={denyPending || acceptPending}
           variant="destructive"
           size="icon"
           onClick={() => denyRequestHandler(id)}
