@@ -9,6 +9,7 @@
  */
 
 import type * as _utils from "../_utils.js";
+import type * as conversations from "../conversations.js";
 import type * as http from "../http.js";
 import type * as request from "../request.js";
 import type * as requests from "../requests.js";
@@ -22,6 +23,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   _utils: typeof _utils;
+  conversations: typeof conversations;
   http: typeof http;
   request: typeof request;
   requests: typeof requests;
